@@ -62,6 +62,7 @@
         // let currentSong = "Sweet Dreams";
 
         // let currentSong = "Cry Me a River";
+        // console.log(currentSong);
 
     // const
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const
@@ -95,13 +96,13 @@
         // } else {
         //     console.log("This song is a normal length.");
         // }
-
-
-    // Date Comparisons
+        
+        
+    // (Date Comparisons)
     
         // let sweetDreamsLastPlayedAt = new Date("2021-11-22 10:30 AM")
         // let cryMeARiverLastPlayedAt = new Date("2021-11-22 10:30 AM")
-        // console.log(sweetDreamsLastPlayedAt < cryMeARiverLastPlayedAt)
+        // console.log(sweetDreamsLastPlayedAt <= cryMeARiverLastPlayedAt)
 
     // ternary operator
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
@@ -110,7 +111,7 @@
 
         // { favorite ? console.log("This song is my favorite!") : console.log("This song is not my favorite!") }
 
-        // or 
+        // // or 
 
         // console.log(`This song ${favorite ? 'is' : 'is not'} my favorite!`)
 
@@ -126,20 +127,37 @@ console.log("------------------------");
 // 🚧 Break Out Activity 1: Using if...else
 
     // 🚧 "time" will be a random number between 0 and 24
-    // ____ time = Math.ceil(Math.random()*24);
+    // const time = Math.ceil(Math.random()*24);
     // log a message to the console indicating whether "time" is in the AM or PM
 
     // If "time" is less than or equal to 12...
-    // if (❓) {
+//     if () {
 
-        // console.log(`${time} is in the AM.`)
+//         console.log(`${time} is in the AM.`)
 
-    // In all other cases...
+// //    In all other cases...
+//     } else {
+
+//         console.log(`${time} is in the PM.`)
+
+//     }
+
+    // const time = Math.ceil(Math.random()*24);
+
+    // if (time <= 12) {
+
+    //     console.log(`${time} is in the AM.`)
+
     // } else {
 
-        // console.log(`${time} is in the PM.`)
+    //     console.log(`${time} is in the PM.`)
 
     // }
+
+const time = Math.ceil(Math.random() * 24);
+time < 12 ? console.log(`${time} is in the AM.`) : console.log(`${time} is in the PM.`)
+
+console.log(`${time} is in the ${time < 12 ? "AM" : "PM"}.`)
 
     // ✨ BONUS: Try refactoring the above expression using a ternary operator.
 
@@ -160,21 +178,45 @@ console.log("------------------------");
     // 3. and then try reassigning otherDate to different values to test your logic
     // to different values to
 
-    // ____ today = new Date("2021-11-22");
-    // ____ yesterday = new Date("2021-11-21");
-    // ____ tomororow = new Date("2021-11-23");
-    // ____ otherDate = yesterday;
+    const today = new Date("2021-11-22");
+    const yesterday = new Date("2021-11-21");
+    const tomorrow = new Date("2021-11-23");
+    let otherDate = yesterday;
 
+    if (otherDate < today) {
+        console.log('This date is in the past')
+    } else if (otherDate > today) {
+        console.log('This date is in the future')
+    } else {
+        console.log('This date is today!')
+    }
 
+    otherDate = tomorrow;
+    
+     if (otherDate < today) {
+        console.log('This date is in the past')
+    } else if (otherDate > today) {
+        console.log('This date is in the future')
+    } else {
+        console.log('This date is today!')
+     }
+    
+    if (otherDate === yesterday) {
+        console.log("This date is in the past")
+    } else if (otherDate === today) {
+        console.log("This date is today")
+    } else {
+        console.log("This date is in the future")
+    }
 
 
     // 🚨 Format your if...else if...else conditional below
     
-        // if (❓) {
-        // ... 
-        // } else if (❓) {
-        // ...
-        // ...
-        // } else {
-        // ...
-        // }
+    // if (❓) {
+    
+    // } else if (❓) {
+    
+    // } else {
+        
+    // }
+   
