@@ -130,7 +130,7 @@ console.log("------------------------");
     // const time = Math.ceil(Math.random()*24);
     // log a message to the console indicating whether "time" is in the AM or PM
 
-    // If "time" is less than or equal to 12...
+    // If "time" is less than 12...
 //     if () {
 
 //         console.log(`${time} is in the AM.`)
@@ -142,24 +142,27 @@ console.log("------------------------");
 
 //     }
 
-    // const time = Math.ceil(Math.random()*24);
+    const time = Math.ceil(Math.random()*24);
 
-    // if (time <= 12) {
+    if (time < 12) {
 
-    //     console.log(`${time} is in the AM.`)
+        console.log(`${time} is in the AM.`)
 
-    // } else {
+    } else {
 
-    //     console.log(`${time} is in the PM.`)
+        console.log(`${time} is in the PM.`)
 
-    // }
+    }
 
-const time = Math.ceil(Math.random() * 24);
-time < 12 ? console.log(`${time} is in the AM.`) : console.log(`${time} is in the PM.`)
 
-console.log(`${time} is in the ${time < 12 ? "AM" : "PM"}.`)
+
 
     // ✨ BONUS: Try refactoring the above expression using a ternary operator.
+
+    // ternary version
+    time < 12 ? console.log(`${time} is in the AM.`) : console.log(`${time} is in the PM.`)
+
+    console.log(`${time} is in the ${time < 12 ? "AM" : "PM"}.`)
 
     // 🚨 Be sure to comment out any code above before proceeding to the next activity.
 
@@ -183,6 +186,8 @@ console.log(`${time} is in the ${time < 12 ? "AM" : "PM"}.`)
     const tomorrow = new Date("2021-11-23");
     let otherDate = yesterday;
 
+    // 🚨 Format your if...else if...else conditional below
+    
     if (otherDate < today) {
         console.log('This date is in the past')
     } else if (otherDate > today) {
@@ -193,30 +198,11 @@ console.log(`${time} is in the ${time < 12 ? "AM" : "PM"}.`)
 
     otherDate = tomorrow;
     
-     if (otherDate < today) {
+    if (otherDate < today) {
         console.log('This date is in the past')
     } else if (otherDate > today) {
         console.log('This date is in the future')
     } else {
         console.log('This date is today!')
-     }
-    
-    if (otherDate === yesterday) {
-        console.log("This date is in the past")
-    } else if (otherDate === today) {
-        console.log("This date is today")
-    } else {
-        console.log("This date is in the future")
     }
-
-
-    // 🚨 Format your if...else if...else conditional below
-    
-    // if (❓) {
-    
-    // } else if (❓) {
-    
-    // } else {
-        
-    // }
    
