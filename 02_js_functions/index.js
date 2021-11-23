@@ -24,23 +24,23 @@
 
   // how can we use the paramater to make our code more dynamic?
 
-    // function playSong(song) {
-    //   return `playing: ${song}`;
+    // function playSong(song, artist, playCount=0) {
+    //   return `playing: ${song} by ${artist} play count: ${playCount}`;
     // }
 
   // now invoke the function and pass in an argument
 
     // console.log(
-    //   playSong("Sweet Dreams")
+    //   playSong("Sweet Dreams", "The Eurythmics", 23)
     // );
 
 // ✅ Arrow Functions
 
 // const squareMe = (n) => n*n;
 
-// const squareMe = (n) => {
-//   return n*n;
-// }
+const squareMe = (n) => {
+  return n*n;
+}
 
 // console.log(squareMe(2))
 
@@ -61,7 +61,7 @@ function log(obj) {
 // console.log('starting now');
 // window.setTimeout(() => {
 //   console.log('2 seconds later')
-// }, 2000);
+// }, 1000 * 60 * 2);
 
 // Alternatively
 
@@ -72,42 +72,42 @@ function log(obj) {
 // window.setTimeout(callback, 2000);
 
 
-// let counter = 10;
-// const interval = window.setInterval(() => {
-//   console.log(counter);
-//   if(counter === 0) {
-//     window.clearInterval(interval);
-//   }
-//   counter--; 
-// }, 1000);
-
+let counter = 10;
+const timerInterval = window.setInterval(() => {
+  console.log(counter);
+  if(counter === 0) {
+    window.clearInterval(timerInterval);
+  }
+  counter--; 
+}, 1000);
+console.log('timerInterval',timerInterval);
 
 // ✅ Scope
 
-// function outerFunction() {
-//   let name = "outer";
-//   let outer = "outer";
-//   console.log("name", name);
-//   console.log("outer", outer);
-//   // console.log("child", child); // throws an error
-//   // console.log("grandChild", grandChild); // throws an error
-//   return function childFunction() {
-//     let name = "child";
-//     let child = "child";
-//     console.log("name", name);
-//     console.log("outer", outer);
-//     console.log("child", child);
-//     // console.log("grandChild", grandChild); // throws an error
-//     return function grandChild() {
-//       let name = "grandChild";
-//       let grandChild = "grandChild";
-//       console.log("name", name);
-//       console.log("outer", outer);
-//       console.log("child", child);
-//       console.log("grandChild", grandChild);
-//     }
-//   }
-// }
+function outerFunction() {
+  let name = "outer";
+  let outer = "outer";
+  console.log("name", name);
+  console.log("outer", outer);
+  // console.log("child", child); // throws an error
+  // console.log("grandChild", grandChild); // throws an error
+  return function childFunction() {
+    let name = "child";
+    let child = "child";
+    console.log("name", name);
+    console.log("outer", outer);
+    console.log("child", child);
+    // console.log("grandChild", grandChild); // throws an error
+    return function grandChild(child) {
+      let name = "grandChild";
+      let grandChild = "grandChild";
+      console.log("name", name);
+      console.log("outer", outer);
+      console.log("child", child);
+      console.log("grandChild", grandChild);
+    }
+  }
+}
 
 // outerFunction()()();
 
@@ -122,6 +122,8 @@ function log(obj) {
 */
 
 // CODE HERE
+let currentSong = "Sweet Dreams";
+let songDuration = 216;
 
 // ✅ Defining Functions
 
@@ -133,18 +135,35 @@ function log(obj) {
 
 // CODE HERE
 
+function formatDuration(duration) {
+  const seconds = duration % 60; // duration - minutes * 60
+  const minutes = Math.floor(duration / 60) % 60;
+  const hours = Math.floor(duration / 3600);
+  return `${hours ? (hours + ':') : ''}${minutes}:${seconds}`
+}
+
 // uncomment the below to test it out
-// formatDuration(216) // should return '3:36'
+console.log(formatDuration(216)) // should return '3:36'
+console.log(formatDuration(4216)) // should return '3:36'
 
 /*
 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 
 3. Create a function called `playSong` that will take a song as an argument and set `currentSong` to the argument passed.
 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 
-
-// CODE HERE
-
-🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 
 */
+
+function playSong(song, duration) {
+  currentSong = song;
+}
+
+currentSong = "Cry Me a River"
+
+// instead of
+
+playSong("Cry Me a River")
+
+// 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 
+
 
 console.log("------------------------");
 console.log("⬇️ Break Out Activities ⬇️");
@@ -165,12 +184,12 @@ let timeSpent = 0;
 
 // CODE HERE
 function startTimer(seconds) {
-  interval = setInterval(() => {
+  interval = window.setInterval(() => {
     timeSpent++;
     seconds--;
     console.log(`${seconds} seconds remaining`)
     if (seconds === 0) {
-      clearInterval(interval);
+      window.clearInterval(interval);
       console.log('Timer expired!')
     }
   }, 1000)
@@ -181,6 +200,6 @@ function startTimer(seconds) {
 
 // CODE HERE
 function stopTimer() {
-  clearInterval(interval);
+  window.clearInterval(interval);
   return `Time Spent on Task: ${timeSpent} seconds`
 }
