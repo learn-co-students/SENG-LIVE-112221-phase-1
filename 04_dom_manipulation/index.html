@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Manipulation</title>
+  <script defer src="index.js"></script>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+  <h1 class="p-4 bg-blue-100 text-2xl">Music Player</h1>
+  <section class="grid sm:grid-cols-3 gap-2 p-4" >
+    <section id="sidebar" class="border-r-2 min-h-screen">
+      <h2 class="text-2xl p-2 mb-2 border-b-2">Songs</h2>
+      <ul class="space-y-2" id="playlist">
+
+      </ul>
+    </section>
+    <section id="main" class="col-span-2 min-h-screen">
+      <h2 id="song-name" class="text-2xl p-2">No Song Selected</h2>
+      <div class="relative" style="padding-top: 56.25%">
+        <iframe id="player" class="absolute inset-0 w-full h-full" frameborder="0" /></iframe>
+      </div>
+      <div class="flex justify-between mt-2">
+        <span id="artist"></span> 
+        <span id="play-count"></span>
+      </div>
+    </section>
+  </section>
+</body>
+</html>
