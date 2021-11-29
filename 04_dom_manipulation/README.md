@@ -79,6 +79,7 @@ function loadSongIntoPlayer(song) {
 - [XSS Cheatsheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
 - [append vs appendChild](https://dev.to/ibn_abubakre/append-vs-appendchild-a4m)
 - [remove vs removeChild](https://stackoverflow.com/questions/36998877/what-is-the-difference-between-remove-and-removechild-method-in-javascript)
+- [Font Awesome for icons](https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free)
 
 ## Key Takeaways
 
