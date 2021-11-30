@@ -96,6 +96,10 @@ function getPlayerElement() {
 
 function renderSong(song) {
   const li = document.createElement('li');
+  li.addEventListener('click', (event) => {
+    loadSongIntoPlayer(song)
+    li.classList.add('bg-gray-100')
+  })
   li.className = "flex justify-between p-2 pr-4 cursor-pointer";
   li.innerHTML = `
   <div>
@@ -155,6 +159,9 @@ function loadSongIntoPlayer(song) {
   getArtistElement().textContent = song.artist;
   getPlayCountElement().textContent = song.playCount === 1 ? '1 play' : `${song.playCount} plays`;
   getPlayerElement().src = `https://www.youtube.com/embed/${extractVideoID(song.youtubeLink)}`;
+  document.querySelectorAll('#playlist li').forEach(li => {
+    li.classList.remove('bg-gray-100')
+  })
 }
 
 function songsByArtist(playlist, artist) {
@@ -164,3 +171,23 @@ function songsByArtist(playlist, artist) {
     target.append(renderSong(song))
   })
 }
+
+document.addEventListener('click', (event) => console.log(event.target))
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('#newSong').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = event.target.nameInput.value;
+    const artist = event.target.artistInput.value;
+    const youtubeLink = event.target.youtubeLink.value;
+    const duration = formattedDurationToSeconds(event.target.durationInput.value);
+    const song = {
+      name: name,
+      artist: artist,
+      youtubeLink: youtubeLink,
+      duration: duration
+    };
+    addSongToPlaylist(playlist, song);
+    event.target.reset()
+  })
+})
