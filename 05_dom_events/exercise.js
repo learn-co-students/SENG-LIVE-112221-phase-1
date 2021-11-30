@@ -38,6 +38,9 @@ function renderTask(task) {
   taskLabelEl.textContent = task.label;
   dueDateEl.textContent = task.dueDate;
   completedEl.innerHTML = `<i class="far ${task.complete ? 'fa-check-square' : 'fa-square'} text-4xl text-green-300 cursor-pointer"></i>`;
+  completedEl.addEventListener('click', (e) => {
+    toggleComplete(task);
+  })
   task.element = li;
   return li;
 }
@@ -77,3 +80,13 @@ function toggleComplete(task) {
   renderTask(task);
   return task;
 }
+
+document.addEventListener('DOMContentLoaded', (e) => {
+  document.querySelector('#newTask').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const taskLabel = document.getElementById('labelInput').value || e.target.labelInput.value;
+    const dueDate = document.getElementById('dueDateInput').value || e.target.labelInput.value;
+    addTask(todoList, taskLabel, new Date(dueDate))
+    e.target.reset()
+  })
+})
