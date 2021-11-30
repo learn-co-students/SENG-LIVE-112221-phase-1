@@ -247,11 +247,11 @@ function songsByArtist(playlist, artist) {
   const target = getPlaylistElement();
   target.innerHTML = '';
   // how do we replace the songs in the sidebar with only the ones matching the artist passed as an argument?
-  
+  playlist.filter(song => song.artist === artist).forEach(song => target.append(renderSong(song)))
 }
 
 
 // // 👟👟👟 uncomment the line below to test
 
-// songsByArtist(playlist, 'Queen')
+songsByArtist(playlist, 'Queen')
 // loadPlaylistToSidebar() // to restore original playlist or just uncomment the line above
