@@ -1,0 +1,82 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "label": "Learn about JS Data Types",
+      "complete": true,
+      "dueDate": "2021-11-22"
+    },
+    {
+      "id": 2,
+      "label": "Learn about Iteration",
+      "complete": false,
+      "dueDate": "2021-11-24"
+    }
+  ],
+  "songs": [
+    {
+      "id": 1,
+      "name": "What'd I Say",
+      "artist": "Ray Charles",
+      "duration": 255,
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=HAjeSS3kktA"
+    },
+    {
+      "id": 2,
+      "name": "Sweet Dreams",
+      "artist": "The Eurythmics",
+      "duration": 216,
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=qeMFqkcPYcg"
+    },
+    {
+      "id": 3,
+      "name": "Cry Me a River",
+      "artist": "Justin Timberlake",
+      "duration": 290,
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=DksSPZTZES0"
+    },
+    {
+      "id": 4,
+      "name": "With a Little Help from my Friends",
+      "artist": "Joe Cocker",
+      "duration": 289,
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=a3LQ-FReO7Q"
+    },
+    {
+      "id": 5,
+      "name": "Bohemian Rhapsody",
+      "artist": "Queen",
+      "duration": 359,
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=fJ9rUzIMcZQ"
+    },
+    {
+      "id": 6,
+      "name": "Somebody To Love",
+      "artist": "Queen",
+      "duration": 309,
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=kijpcUv-b8M"
+    },
+    {
+      "id": 7,
+      "name": "Another One Bites the Dust",
+      "artist": "Queen",
+      "duration": 222,
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=eqyUAtzS_6M"
+    },
+    {
+      "id": 8,
+      "name": "Purple Rain",
+      "artist": "Prince",
+      "duration": 477,
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=TvnYmWpD_T8"
+    }
+  ]
+}
