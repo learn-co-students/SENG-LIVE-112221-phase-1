@@ -11,11 +11,29 @@ document.addEventListener('DOMContentLoaded', () => {
       name: name,
       artist: artist,
       youtubeLink: youtubeLink,
-      duration: duration
+      duration: duration,
+      playCount: 0
     };
-    addSongToPlaylist(playlist, song);
-    event.target.reset()
+    fetch('http://localhost:3000/songs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(song)
+    })
+      .then(response => response.json())
+      .then(savedSong => {
+        addSongToPlaylist(playlist, savedSong);
+        event.target.reset()
+      })
   })
+
+  fetch('http://localhost:3000/songs')
+    .then(response => response.json())
+    .then(songs => {
+      playlist = songs;
+      loadPlaylistToSidebar()
+    })
 })
 
 function formatDuration(duration) {
