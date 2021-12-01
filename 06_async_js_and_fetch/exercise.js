@@ -4,6 +4,14 @@ let todoList
 //  - store the resulting data in `todoList`
 //  - invoke `loadTodoList`, passing `todoList` as an argument
 
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('http://localhost:3000/tasks')
+    .then((response) => response.json())
+    .then(tasks => {
+      todoList = tasks;
+      loadTodoList(todoList);
+    })
+})
 
 
 
@@ -36,7 +44,6 @@ function renderTask(task) {
   const dueDateEl = li.querySelector('.due-date');
   const completedEl = li.querySelector('.completed');
   
-  // 🚧 Task 2: add Event Listener to toggle the completed status here
   completedEl.addEventListener('click', (event) => {
     toggleComplete(task);
   })
@@ -59,12 +66,27 @@ function addTask(taskLabel, dueDate) {
   // 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 
   // BONUS Task 2: Add fetch request to persist the newTask to the json-server before adding it to the todoList and the DOM
   // 
+
+  fetch(`http://localhost:3000/tasks`, {
+    method: "POST",
+    header: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(newTask)
+  })
+    .then(res => res.json())
+    .then(savedTask => {
+      todoList.push(savedTask)
+      const target = getTodoListElement()
+      target.append(renderTask(savedTask))
+      return savedTask
+    })
   // move the lines below inside of the promise callback so that you update the todoList and the DOM after the `newTask` is added to db.json via fetch.
   // You want to make sure that the newly added task has an id as that will be important later on.
-  todoList.push(newTask);
-  const target = getTodoListElement();
-  target.append(renderTask(newTask))
-  return newTask
+  // todoList.push(newTask);
+  // const target = getTodoListElement();
+  // target.append(renderTask(newTask))
+  // return newTask
 }
 
 function removeTask(todoList, taskLabel) {
@@ -77,6 +99,16 @@ function toggleComplete(task) {
   task.complete = !task.complete;
   // 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 
   // BONUS Task 3: send a fetch request to update the task in json-server so that the complete status will be persisted to db.json
+  fetch(`http://localhost:3000/tasks/${task.id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      complete: task.complete
+    })
+  })
+    .then(response => response.json())
+    .then(console.log)
+  // optimistically update the DOM before waiting for the fetch to go through
   renderTask(task);
   return task;
 }
@@ -85,7 +117,7 @@ function handleNewTaskSubmit(event) {
   event.preventDefault();
   const label = event.target.labelInput.value;
   const dueDate = new Date(event.target.dueDateInput.value);
-  addTask(todoList, label, dueDate);
+  addTask(label, dueDate);
   event.target.reset();
 }
 
