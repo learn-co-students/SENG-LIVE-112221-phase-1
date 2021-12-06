@@ -10,21 +10,20 @@
 ## Three Pillars
 
 - Recognize Events (Behavior)
-  - DOMContentLoaded to populate the list
+  - DOMContentLoaded to populate the list of songs and load the first into the player
   - Clicking on a Song to load it into the player
   - Submitting the new song form
   - Submitting the new comment form
-- Manipulate the DOM (Display)
-  - Functions that query the DOM for important container elements where we'll do manipulation
-  - A function to clear out the list of songs
-  - A function to clear out the list of comments
-  - A function that takes song data as an input and uses it to add the song to the DOM along with its related comments
-  - A function that takes persisted comment data as an input and uses it to add the comment to the DOM.
 - Communicate with the Server (Data)
   - GET all songs
   - POST new song
   - GET all comments on a particular song.
   - POST new comment
+- Manipulate the DOM (Display)
+  - A function that takes song data as an input and uses it to add the song to the DOM along with its related comments
+  - A function that takes persisted comment data as an input and uses it to add the comment to the DOM.
+  - A function that takes an array of songs as an argument and renders each of them as an `li` element in the sidebar.
+  - A function that takes an array of comments as an argument and renders them to the comments container below the player.
 
 ![Data Display and Behavior](../assets/workflow.png)
 
