@@ -1,8 +1,4 @@
 let todoList
-// 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 
-// Task 1: add an event listener for DOMContentLoaded that will `fetch` the tasks from the json-server (`http://localhost:3000/tasks`)
-//  - store the resulting data in `todoList`
-//  - invoke `loadTodoList`, passing `todoList` as an argument
 document.addEventListener('DOMContentLoaded', () => {
   fetch('http://localhost:3000/tasks')
     .then((response) => response.json())
@@ -23,7 +19,7 @@ function getTodoListElement() {
 }
 
 function renderTask(task) {
-  const li = document.querySelector(`li.task[data-task-id="${task.id}"]`) || document.createElement('li');
+  const li = document.createElement('li');
   li.className = 'grid grid-cols-12 items-center task';
   li.dataset.taskId = task.id;
   li.innerHTML = `
@@ -65,11 +61,7 @@ function addTask(taskLabel, dueDate) {
     dueDate: dueDate,
     completed: false
   }
-  // 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 
-  // BONUS Task 2: Add fetch request to persist the newTask to the json-server before adding it to the todoList and the DOM
-  // 
-  // move the lines below inside of the promise callback so that you update the todoList and the DOM after the `newTask` is added to db.json via fetch.
-  // You want to make sure that the newly added task has an id as that will be important later on.
+  
   return fetch('http://localhost:3000/tasks', {
     method: 'POST',
     headers: {
