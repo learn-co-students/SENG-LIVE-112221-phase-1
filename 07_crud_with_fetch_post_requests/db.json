@@ -1,0 +1,142 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "label": "Learn about JS Data Types",
+      "complete": true,
+      "dueDate": "2021-11-22"
+    },
+    {
+      "id": 2,
+      "label": "Learn about Iteration",
+      "complete": false,
+      "dueDate": "2021-11-24"
+    },
+    {
+      "label": "demo task",
+      "dueDate": "2021-12-1",
+      "completed": false,
+      "id": 3
+    },
+    {
+      "label": "learn about fetch",
+      "dueDate": "2021-12-1",
+      "completed": false,
+      "id": 4
+    }
+  ],
+  "songs": [
+    {
+      "id": 1,
+      "name": "What'd I Say",
+      "artist": "Ray Charles",
+      "duration": "4:15",
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=HAjeSS3kktA"
+    },
+    {
+      "id": 2,
+      "name": "Sweet Dreams",
+      "artist": "The Eurythmics",
+      "duration": "3:35",
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=qeMFqkcPYcg"
+    },
+    {
+      "id": 3,
+      "name": "Cry Me a River",
+      "artist": "Justin Timberlake",
+      "duration": "4:51",
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=DksSPZTZES0"
+    },
+    {
+      "id": 4,
+      "name": "With a Little Help from my Friends",
+      "artist": "Joe Cocker",
+      "duration": "4:50",
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=a3LQ-FReO7Q"
+    },
+    {
+      "id": 5,
+      "name": "Bohemian Rhapsody",
+      "artist": "Queen",
+      "duration": "6:00",
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=fJ9rUzIMcZQ"
+    },
+    {
+      "id": 6,
+      "name": "Somebody To Love",
+      "artist": "Queen",
+      "duration": "5:10",
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=kijpcUv-b8M"
+    },
+    {
+      "id": 7,
+      "name": "Another One Bites the Dust",
+      "artist": "Queen",
+      "duration": "3:41",
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=eqyUAtzS_6M"
+    },
+    {
+      "id": 8,
+      "name": "Purple Rain",
+      "artist": "Prince",
+      "duration": "7:58",
+      "playCount": 0,
+      "youtubeLink": "https://www.youtube.com/watch?v=TvnYmWpD_T8"
+    },
+    {
+      "name": "Georgia On My Mind",
+      "artist": "Ray Charles",
+      "duration": "3:37",
+      "youtubeLink": "https://www.youtube.com/watch?v=ggGzE5KfCio",
+      "playCount": 0,
+      "id": 9
+    }
+  ],
+  "comments": [
+    {
+      "comment": "hello",
+      "songId": "1",
+      "id": 1
+    },
+    {
+      "comment": "there\n",
+      "songId": "1",
+      "id": 2
+    },
+    {
+      "comment": "what?",
+      "songId": "1",
+      "id": 3
+    },
+    {
+      "comment": "hello\n",
+      "songId": "5",
+      "id": 4
+    },
+    {
+      "comment": "hello",
+      "id": 5
+    },
+    {
+      "comment": "there",
+      "id": 6
+    },
+    {
+      "songId": "3",
+      "comment": "cry\n",
+      "id": 7
+    },
+    {
+      "songId": "2",
+      "comment": "sweet",
+      "id": 8
+    }
+  ]
+}

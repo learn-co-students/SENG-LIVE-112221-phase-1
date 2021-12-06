@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Manipulation</title>
+  <script defer src="exercise.js"></script>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <ul id="todoList" class="w-4/5 max-w-5xl mx-auto mt-4 space-y-2">
+    <li class="grid grid-cols-12 justify-between text-xl font-semibold border-b-2 mb-4">
+      <span class="col-span-6 task">
+        Task
+      </span>
+      <span class="col-span-5 due-date">
+        Due Date
+      </span>
+      <span class="completed">
+        
+      </span>
+    </li>
+  </ul>
+  <form id="newTask" class="w-4/5 max-w-5xl mx-auto mt-4 flex justify-between">
+    <p class="flex justify-between items-center">
+      <input 
+        type="text" 
+        name="label" 
+        id="labelInput" 
+        class="border-2 p-2 w-80"
+        placeholder="Label"
+      />
+    </p>
+    <p class="flex justify-between items-center">
+      <input 
+        type="text" 
+        name="dueDate" 
+        id="dueDateInput" 
+        class="border-2 p-2 w-80"
+        placeholder="Due Date"
+      />
+    </p>
+    <p class="flex items-center">
+      <button class="bg-blue-300 w-full p-2 border-2" type="submit">Add Task to Todo List</button>
+    </p>
+  </form>
+</body>
+</html>
