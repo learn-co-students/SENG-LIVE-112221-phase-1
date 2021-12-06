@@ -4,6 +4,7 @@ const init = () => {
   // fetch songs for initial load
   getSongs()
     .then(renderSongs)
+ 
   // handle form submission for creating a new song
   document.querySelector('#newSong').addEventListener('submit', (event) => {
     event.preventDefault();
@@ -20,7 +21,23 @@ const init = () => {
   // Add Submit Handler for new Comment Form
   // pull data out of form and pass to createComment
   // after promise resolves, pass response to renderComment and reset the form
-  
+  document.querySelector('#newComment').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const commentData = {
+      comment: event.target.commentInput.value,
+      songId: event.target.dataset.songId
+    }
+    // persist comment to serve and return a promise for the persisted comment object
+    createComment(commentData)
+      .then(savedComment => {
+        renderComment(savedComment)
+        event.target.reset()
+      })
+  })
+  // async await example (requires that you add `async` before the `()` in the function definition)
+  // const songs = await getSongs()
+  // console.log(songs)
+  // renderSongs(songs);
 }
 
 document.addEventListener('DOMContentLoaded', init)
@@ -50,13 +67,21 @@ document.addEventListener('DOMContentLoaded', init)
   // that json-server will filter out comments on 
   // other songs
   const getComments = (song) => {
-    
+    return fetch(`http://localhost:3000/comments?songId=${song.id}`)
+      .then(res => res.json())
   }
   // add in a createComment(commentData) function
   // that will accept an object with songId and 
   // comment properties
   const createComment = (commentData) => {
-    
+    return fetch('http://localhost:3000/comments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(commentData)
+    })
+      .then(res => res.json())
   }
 
   // utility functions related to data
@@ -117,16 +142,18 @@ document.addEventListener('DOMContentLoaded', init)
     // handler to ensure that the comment is 
     // associated with the song that is loaded into
     // the player.
-    
+    document.querySelector('#newComment').dataset.songId = song.id;
     // clear out the comments list and load comments for this song into the comments part of the DOM
-    
+    getComments(song).then(renderComments)
   }
 
   // define a function renderComment for 
   // rendering a single comment from a 
   // peristed record passed as an argument
   const renderComment = (record) => {
-    
+    const p = document.createElement('p');
+    p.innerText = record.comment
+    document.getElementById('comments').append(p);
   }
 
   // define a function renderComments for
@@ -134,6 +161,7 @@ document.addEventListener('DOMContentLoaded', init)
   // div with the retrieved comments from the API
   // passing them to renderComment 
   const renderComments = (comments) => {
-    
+    document.getElementById('comments').innerHTML = '';
+    comments.forEach(renderComment)
   }
 
