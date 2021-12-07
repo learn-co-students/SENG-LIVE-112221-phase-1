@@ -139,7 +139,22 @@ document.addEventListener('DOMContentLoaded', init)
   // 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 
   // add in updateComment(commentId, commentData) and
   // deleteComment(commentId)
-  
+  const updateComment = (commentId, commentData) => {
+    return fetch(`http://localhost:3000/comments/${commentId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(commentData)
+    })
+      .then(res => res.json())
+  }
+
+  const deleteComment = (commentId) => {
+    return fetch(`http://localhost:3000/comments/${commentId}`, {
+      method: 'DELETE'
+    })  
+  }
 
 
   // utility functions related to data
@@ -197,12 +212,8 @@ document.addEventListener('DOMContentLoaded', init)
       li.classList.remove('bg-gray-100')
     })
     document.querySelector(`#playlist li[data-song-id="${song.id}"]`).classList.add('bg-gray-100')
-    // Add a data attribute to the newComment form
-    // to track the songId of the selected song
-    // We'll use this from within the submit event
-    // handler to ensure that the comment is 
-    // associated with the song that is loaded into
-    // the player.
+    // Add data attributes to track the songId
+    // of the selected song
     document.querySelector('#editSong').dataset.songId = song.id;
     document.querySelector('#deleteSong').dataset.songId = song.id;
     document.querySelector('#newComment').dataset.songId = song.id;
@@ -228,7 +239,13 @@ document.addEventListener('DOMContentLoaded', init)
     input.value = record.comment;
     // 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 🚧 
     // add event listeners for updating or deleting a comment
-    
+    input.addEventListener('keyup', (event) => {
+      updateComment(record.id, {comment: event.target.value})
+    })
+    deleteBtn.addEventListener('click', (event) => {
+      deleteComment(record.id)
+        .then(() => p.remove());
+    })
     target.append(p);
   }
 
