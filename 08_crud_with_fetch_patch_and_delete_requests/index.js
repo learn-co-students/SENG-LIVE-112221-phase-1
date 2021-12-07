@@ -17,6 +17,53 @@ const init = () => {
     createSong(songData)
       .then(renderSong)
   })
+  const editSongForm = document.querySelector('#editSong')
+  editSongForm.addEventListener('keyup', (event) => {
+    console.log('we pressed a key and let it go')
+    triggerSongAutoSave()
+  })
+
+  editSongForm.addEventListener('submit', (event) => event.preventDefault())
+
+  let queuedSongAutoSave;
+  const triggerSongAutoSave = () => {
+    window.clearTimeout(queuedSongAutoSave);
+    queuedSongAutoSave = window.setTimeout(() => {
+      const songId = editSongForm.dataset.songId;
+      const songData = {
+        name: document.getElementById('song-name').value,
+        artist: document.getElementById('artist').value,
+        playCount: parseInt(document.getElementById('play-count').value, 10)
+      }
+      updateSong(songId, songData)
+        .then(renderSong);
+    }, 300)
+  }
+
+  document.querySelector('#play-count').addEventListener('change', (e) => {
+    triggerSongAutoSave()
+  })
+
+  const deleteBtn = document.getElementById('deleteSong');
+  deleteBtn.addEventListener('click', (e) => {
+    let nextSelectedSong;
+    const songIdToDelete = parseInt(deleteBtn.dataset.songId, 10);
+    getSongs()
+      .then(songs => {
+        const index = songs.findIndex((song) => song.id === songIdToDelete);
+        if (songs.length - 1 === index) {
+          nextSelectedSong = songs[index - 1]
+        } else {
+          nextSelectedSong = songs[index + 1];
+        }
+      })
+      .then(() => deleteSong(songIdToDelete))
+      .then(() => {
+        document.querySelector(`#playlist li[data-song-id="${songIdToDelete}"]`).remove();
+        loadSongIntoPlayer(nextSelectedSong)
+      })
+  })
+
   // Add Submit Handler for new Comment Form
   // pull data out of form and pass to createComment
   // after promise resolves, pass response to renderComment and reset the form
@@ -53,6 +100,23 @@ document.addEventListener('DOMContentLoaded', init)
       body: JSON.stringify(songData)
     })
       .then(res => res.json())
+  }
+
+  const updateSong = (songId, songData) => {
+    return fetch(`http://localhost:3000/songs/${songId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(songData)
+    })
+      .then(res => res.json())
+  }
+
+  const deleteSong = (songId) => {
+    return fetch(`http://localhost:3000/songs/${songId}`, {
+      method: 'DELETE'
+    })  
   }
 
 
@@ -93,7 +157,8 @@ document.addEventListener('DOMContentLoaded', init)
 // Display
 
   const renderSong = (song) => {
-    const li = document.createElement('li');
+    const existingLi = document.querySelector(`#playlist li[data-song-id="${song.id}"]`)
+    const li = existingLi || document.createElement('li');
     li.dataset.songId = song.id;
     li.className = "flex justify-between p-2 pr-4 cursor-pointer";
     li.innerHTML = `
@@ -104,7 +169,6 @@ document.addEventListener('DOMContentLoaded', init)
     <div class="duration text-gray-400"></div>`;
     li.addEventListener('click', (e) => {
       loadSongIntoPlayer(song);
-      li.classList.add('bg-gray-100')
     })
     const songEl = li.querySelector('.song');
     const artistEl = li.querySelector('.artist');
@@ -112,8 +176,10 @@ document.addEventListener('DOMContentLoaded', init)
     songEl.textContent = song.name;
     artistEl.textContent = `by ${song.artist}`;
     durationEl.textContent = song.duration;
-    const target = document.querySelector('#playlist');
-    target.append(li);
+    if (!existingLi) {
+      const target = document.querySelector('#playlist');
+      target.append(li);
+    }
     return li;
   }
 
@@ -123,19 +189,22 @@ document.addEventListener('DOMContentLoaded', init)
   }
 
   const loadSongIntoPlayer = (song) => {
-    document.querySelector('#song-name').textContent = song.name;
-    document.querySelector('#artist').textContent = song.artist;
-    document.querySelector('#play-count').textContent = song.playCount === 1 ? '1 play' : `${song.playCount} plays`;
+    document.querySelector('#song-name').value = song.name;
+    document.querySelector('#artist').value = song.artist;
+    document.querySelector('#play-count').value = song.playCount;
     document.querySelector('#player-frame').src = `https://www.youtube.com/embed/${extractVideoID(song.youtubeLink)}`;
     document.querySelectorAll('#playlist li').forEach(li => {
       li.classList.remove('bg-gray-100')
     })
+    document.querySelector(`#playlist li[data-song-id="${song.id}"]`).classList.add('bg-gray-100')
     // Add a data attribute to the newComment form
     // to track the songId of the selected song
     // We'll use this from within the submit event
     // handler to ensure that the comment is 
     // associated with the song that is loaded into
     // the player.
+    document.querySelector('#editSong').dataset.songId = song.id;
+    document.querySelector('#deleteSong').dataset.songId = song.id;
     document.querySelector('#newComment').dataset.songId = song.id;
     // clear out the comments list and load comments for this song into the comments part of the DOM
     document.querySelector('#comments').innerHTML = "";
