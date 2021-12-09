@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', init)
   //   target.append(p);
   // }
 
-  const renderComment = (record) => {
+  const renderComment = ({id, comment}) => {
     const target = document.querySelector('#comments');
     const p = document.createElement('p');
     p.className = "flex justify-between";
@@ -248,13 +248,13 @@ document.addEventListener('DOMContentLoaded', init)
     `
     const input = p.querySelector('input');
     const deleteBtn = p.querySelector('button');
-    input.value = record.comment;
+    input.value = comment;
     // add event listeners for updating or deleting a comment
     input.addEventListener('keyup', (e) => {
-      updateComment(record.id, { comment: e.target.value });
+      updateComment(id, { comment: e.target.value });
     })
     deleteBtn.addEventListener('click', (e) => {
-      deleteComment(record.id)
+      deleteComment(id)
         .then(() => p.remove())
     })
     target.append(p);
@@ -266,3 +266,31 @@ document.addEventListener('DOMContentLoaded', init)
     comments.forEach(renderComment)
   }
 
+  // Example of expanding the Array prototype
+Array.prototype.last = function() {
+  return this[this.length - 1]
+}
+
+const destructure = (obj) => {
+  const { name, favoriteMovie } = obj;
+  console.log(obj);
+  console.log(name);
+  console.log(favoriteMovie);
+}
+
+destructure({ name: 'Dakota', favoriteMovie: 'The Matrix' })
+
+// const [name, setName] = useState('Dakota')
+
+
+let t = {hungry: true};
+let hungryObj = t;
+// negate the avlue of hungry within the object
+console.log(t === hungryObj)
+hungryObj.hungry = !hungryObj.hungry;
+// now hungryObj.hungry refers to `false` instead of true
+// while the boolean value itself isn't mutated 
+// because it's not a reference type, in this case,
+// changing a property of `hungryObj` does affect `t` // because the object is passed by reference when we
+// assign `t` as the value for `hungryObj`
+console.log(t === hungryObj)
